@@ -1,0 +1,41 @@
+{
+  "name": "tree-sitter-tablegen",
+  "version": "1.0.0",
+  "description": "Tree sitter parser for LLVM TableGen",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "tree-sitter test",
+    "format": "prettier --trailing-comma es5 --write grammar.js",
+    "format-check": "prettier --trailing-comma es5 --check grammar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flakebi/tree-sitter-tablegen.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "lexer",
+    "llvm",
+    "tablegen"
+  ],
+  "author": "Flakebi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Flakebi/tree-sitter-tablegen/issues"
+  },
+  "homepage": "https://github.com/Flakebi/tree-sitter-tablegen#readme",
+  "devDependencies": {
+    "nan": "^2.15.0",
+    "prettier": "^2.5.1",
+    "tree-sitter-cli": "^0.20.1"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.tablegen",
+      "file-types": [
+        "td"
+      ]
+    }
+  ]
+}
