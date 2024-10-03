@@ -103,17 +103,24 @@
   {
     "type": "def",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "record_body",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "parent_class_list",
-          "named": true
-        },
-        {
-          "type": "record_body",
           "named": true
         },
         {
