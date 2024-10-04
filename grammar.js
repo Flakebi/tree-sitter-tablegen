@@ -46,11 +46,13 @@ module.exports = grammar({
       $.defm,
       $.defset,
       $.defvar,
+      $.deftype,
       $.foreach,
       $.if,
       $.let,
       $.multiclass,
       $.include,
+      $.dump,
     ),
 
     statement_or_block: $ => choice(
@@ -68,7 +70,18 @@ module.exports = grammar({
 
     parent_class_list: $ => seq(
       ':',
-      commaSep1(seq($.identifier, optional(seq('<', commaSep(field('argument', $.value)), '>')))),
+      commaSep1(seq($.identifier, optional($.argument_list))),
+    ),
+
+    argument_list: $ => seq(
+      '<',
+      commaSep(
+        field('argument', seq(
+          optional(seq($.identifier, '=')),
+          $.value,
+        )),
+      ),
+      '>',
     ),
 
     template_args: $ => seq('<', commaSep(field('argument', $.template_arg)), '>'),
@@ -82,6 +95,7 @@ module.exports = grammar({
       $.let_inst,
       $.def_var,
       $.assert,
+      $.dump,
     ),
 
     instruction: $ => seq(
@@ -148,6 +162,7 @@ module.exports = grammar({
       $.foreach,
       $.if,
       $.let,
+      $.dump,
     ),
 
     defm: $ => seq(
@@ -172,6 +187,14 @@ module.exports = grammar({
       $.identifier,
       '=',
       $.value,
+      ';',
+    ),
+
+    deftype: $ => seq(
+      'deftype',
+      $.identifier,
+      '=',
+      $.type,
       ';',
     ),
 
@@ -256,10 +279,13 @@ module.exports = grammar({
 
     value_suffix: $ => prec(1, choice(
       seq('{', commaSep($.value), '}'),
-      seq('[', commaSep($.value), ']'),
+      seq('[', commaSep($.value), optional(','), ']'),
+      $.argument_list,
       seq('.', $.identifier),
       seq(choice('...', '-'), $.value),
     )),
+
+    dump: $ => seq('dump', $.value, ';'),
 
     // Not including !cond
     operator_keyword: $ => seq(
@@ -269,15 +295,21 @@ module.exports = grammar({
         'and',
         'cast',
         'con',
+        'cond',
         'dag',
+        'div',
         'empty',
         'eq',
+        'exists',
         'filter',
         'find',
         'foldl',
         'foreach',
         'ge',
+        'getdagarg',
+        'getdagname',
         'getdagop',
+        'getop',
         'gt',
         'head',
         'if',
@@ -285,13 +317,21 @@ module.exports = grammar({
         'isa',
         'le',
         'listconcat',
+        'listflatten',
+        'listremove',
         'listsplat',
+        'logtwo',
         'lt',
         'mul',
         'ne',
         'not',
         'or',
+        'range',
+        'repr',
+        'setdagarg',
+        'setdagname',
         'setdagop',
+        'setop',
         'shl',
         'size',
         'sra',
@@ -301,6 +341,8 @@ module.exports = grammar({
         'subst',
         'substr',
         'tail',
+        'tolower',
+        'toupper',
         'xor',
       )),
     ),

@@ -227,8 +227,9 @@ multiclass Foo <int Bar> {
           (def
             (parent_class_list
               (identifier)
-              (value
-                (identifier)))
+              (argument_list
+                (value
+                  (identifier))))
             (record_body)))))))
 
 ================================================================================
@@ -262,13 +263,14 @@ def rec1 : A<(ops rec1)>;
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (dag_arg
-            (value
-              (identifier)))
-          (dag_arg
-            (value
-              (identifier)))))
+        (argument_list
+          (value
+            (dag_arg
+              (value
+                (identifier)))
+            (dag_arg
+              (value
+                (identifier))))))
       (record_body))))
 
 ================================================================================
@@ -312,28 +314,29 @@ let isCall = true in
             (identifier))
           (parent_class_list
             (identifier)
-            (value
-              (number))
-            (value
-              (identifier))
-            (value
-              (dag_arg
-                (value
-                  (identifier))))
-            (value
-              (dag_arg
-                (value
-                  (identifier))))
-            (value
-              (string_string))
-            (value
+            (argument_list
+              (value
+                (number))
+              (value
+                (identifier))
               (value
                 (dag_arg
                   (value
-                    (identifier)))
+                    (identifier))))
+              (value
                 (dag_arg
                   (value
-                    (number))))))
+                    (identifier))))
+              (value
+                (string_string))
+              (value
+                (value
+                  (dag_arg
+                    (value
+                      (identifier)))
+                  (dag_arg
+                    (value
+                      (number)))))))
           (record_body)))))
   (statement
     (let
@@ -408,57 +411,15 @@ let isCall = true in
                 (identifier))
               (parent_class_list
                 (identifier)
-                (value
-                  (number))
-                (value
-                  (identifier))
-                (value
-                  (dag_arg
-                    (value
-                      (identifier))))
-                (value
-                  (dag_arg
-                    (value
-                      (identifier)))
-                  (dag_arg
-                    (value
-                      (identifier))
-                    (var))
-                  (dag_arg
-                    (value
-                      (identifier))))
-                (value
-                  (string_string))
-                (value))
-              (record_body)))
-          (statement
-            (def
-              (value
-                (identifier))
-              (parent_class_list
-                (identifier)
-                (value
-                  (number))
-                (value
-                  (identifier))
-                (value
-                  (dag_arg
-                    (value
-                      (identifier))))
-                (value
-                  (dag_arg
-                    (value
-                      (identifier)))
-                  (dag_arg
-                    (value
-                      (identifier))
-                    (var))
-                  (dag_arg
-                    (value
-                      (identifier))))
-                (value
-                  (string_string))
-                (value
+                (argument_list
+                  (value
+                    (number))
+                  (value
+                    (identifier))
+                  (value
+                    (dag_arg
+                      (value
+                        (identifier))))
                   (value
                     (dag_arg
                       (value
@@ -466,7 +427,13 @@ let isCall = true in
                     (dag_arg
                       (value
                         (identifier))
-                      (var)))))
+                      (var))
+                    (dag_arg
+                      (value
+                        (identifier))))
+                  (value
+                    (string_string))
+                  (value)))
               (record_body)))
           (statement
             (def
@@ -474,28 +441,67 @@ let isCall = true in
                 (identifier))
               (parent_class_list
                 (identifier)
-                (value
-                  (number))
-                (value
-                  (identifier))
-                (value
-                  (dag_arg
+                (argument_list
+                  (value
+                    (number))
+                  (value
+                    (identifier))
+                  (value
+                    (dag_arg
+                      (value
+                        (identifier))))
+                  (value
+                    (dag_arg
+                      (value
+                        (identifier)))
+                    (dag_arg
+                      (value
+                        (identifier))
+                      (var))
+                    (dag_arg
+                      (value
+                        (identifier))))
+                  (value
+                    (string_string))
+                  (value
                     (value
-                      (identifier))))
-                (value
-                  (dag_arg
-                    (value
-                      (identifier)))
-                  (dag_arg
-                    (value
-                      (identifier))
-                    (var))
-                  (dag_arg
-                    (value
-                      (identifier))))
-                (value
-                  (string_string))
-                (value))
+                      (dag_arg
+                        (value
+                          (identifier)))
+                      (dag_arg
+                        (value
+                          (identifier))
+                        (var))))))
+              (record_body)))
+          (statement
+            (def
+              (value
+                (identifier))
+              (parent_class_list
+                (identifier)
+                (argument_list
+                  (value
+                    (number))
+                  (value
+                    (identifier))
+                  (value
+                    (dag_arg
+                      (value
+                        (identifier))))
+                  (value
+                    (dag_arg
+                      (value
+                        (identifier)))
+                    (dag_arg
+                      (value
+                        (identifier))
+                      (var))
+                    (dag_arg
+                      (value
+                        (identifier))))
+                  (value
+                    (string_string))
+                  (value)))
               (record_body))))))))
 
 ================================================================================
@@ -560,7 +566,8 @@ foreach i = [0, 1, 2, 3] in {
               (value
                 (identifier)))
             (parent_class_list
-              (identifier))
+              (identifier)
+              (argument_list))
             (record_body)))
         (statement
           (def
@@ -570,7 +577,8 @@ foreach i = [0, 1, 2, 3] in {
               (value
                 (identifier)))
             (parent_class_list
-              (identifier))
+              (identifier)
+              (argument_list))
             (record_body)))))))
 
 ================================================================================
@@ -634,8 +642,9 @@ def Rec20 : Person<"Donald Knuth", 60> {
           (identifier)))
       (parent_class_list
         (identifier)
-        (value
-          (identifier)))
+        (argument_list
+          (value
+            (identifier))))
       (record_body
         (body_item
           (assert
@@ -673,10 +682,11 @@ def Rec20 : Person<"Donald Knuth", 60> {
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (string_string))
-        (value
-          (number)))
+        (argument_list
+          (value
+            (string_string))
+          (value
+            (number))))
       (record_body))))
 
 ================================================================================

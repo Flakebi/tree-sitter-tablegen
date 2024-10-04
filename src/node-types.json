@@ -1,5 +1,29 @@
 [
   {
+    "type": "argument_list",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "assert",
     "named": true,
     "fields": {},
@@ -28,6 +52,10 @@
         },
         {
           "type": "def_var",
+          "named": true
+        },
+        {
+          "type": "dump",
           "named": true
         },
         {
@@ -192,6 +220,25 @@
     }
   },
   {
+    "type": "deftype",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "defvar",
     "named": true,
     "fields": {},
@@ -203,6 +250,21 @@
           "type": "identifier",
           "named": true
         },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dump",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
           "type": "value",
           "named": true
@@ -436,6 +498,10 @@
           "named": true
         },
         {
+          "type": "dump",
+          "named": true
+        },
+        {
           "type": "foreach",
           "named": true
         },
@@ -492,22 +558,15 @@
   {
     "type": "parent_class_list",
     "named": true,
-    "fields": {
-      "argument": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "value",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -559,7 +618,15 @@
           "named": true
         },
         {
+          "type": "deftype",
+          "named": true
+        },
+        {
           "type": "defvar",
+          "named": true
+        },
+        {
+          "type": "dump",
           "named": true
         },
         {
@@ -729,6 +796,10 @@
       "required": false,
       "types": [
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -852,7 +923,15 @@
     "named": false
   },
   {
+    "type": "deftype",
+    "named": false
+  },
+  {
     "type": "defvar",
+    "named": false
+  },
+  {
+    "type": "dump",
     "named": false
   },
   {

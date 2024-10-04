@@ -15,8 +15,9 @@ def OMP_Tile : Directive<"tile"> {
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (string_string)))
+        (argument_list
+          (value
+            (string_string))))
       (record_body
         (body_item
           (let_inst
@@ -95,8 +96,9 @@ multiclass SystemZUnaryBHFG<string name> : SystemZUnaryBHF<name> {
           (identifier)))
       (parent_class_list
         (identifier)
-        (value
-          (identifier)))
+        (argument_list
+          (value
+            (identifier))))
       (multiclass_body
         (multiclass_statement
           (def
@@ -104,13 +106,14 @@ multiclass SystemZUnaryBHFG<string name> : SystemZUnaryBHF<name> {
               (identifier))
             (parent_class_list
               (identifier)
-              (value
+              (argument_list
                 (value
-                  (identifier))
+                  (value
+                    (identifier))
+                  (value
+                    (string_string)))
                 (value
-                  (string_string)))
-              (value
-                (identifier)))
+                  (identifier))))
             (record_body)))))))
 
 ================================================================================
@@ -170,15 +173,16 @@ multiclass FRIntNNT<bits<2> opcode, string asm, SDPatternOperator node = null_fr
             (identifier))))
       (parent_class_list
         (identifier)
-        (value
+        (argument_list
           (value
-            (number))
+            (value
+              (number))
+            (value
+              (identifier)))
           (value
-            (identifier)))
-        (value
-          (identifier))
-        (value
-          (identifier)))
+            (identifier))
+          (value
+            (identifier))))
       (multiclass_body))))
 
 ================================================================================
@@ -198,18 +202,19 @@ multiclass sve_int_dup_imm_pred_merge_inst {
           (def
             (parent_class_list
               (identifier)
-              (value
-                (dag_arg
-                  (value
-                    (identifier)
+              (argument_list
+                (value
+                  (dag_arg
+                    (value
+                      (identifier)
+                      (value
+                        (identifier))
+                      (value_suffix
+                        (identifier))))
+                  (dag_arg
                     (value
                       (identifier))
-                    (value_suffix
-                      (identifier))))
-                (dag_arg
-                  (value
-                    (identifier))
-                  (var))))
+                    (var)))))
             (record_body)))))))
 
 ================================================================================
@@ -273,28 +278,29 @@ def : GCNPat <
     (def
       (parent_class_list
         (identifier)
-        (value
-          (dag_arg
-            (value
-              (identifier)))
-          (multiline_comment)
-          (dag_arg
-            (value
-              (dag_arg
-                (value
-                  (identifier)))
-              (dag_arg
-                (value
-                  (number)))))
-          (multiline_comment)
-          (dag_arg
-            (value
-              (dag_arg
-                (value
-                  (identifier)))
-              (dag_arg
-                (value
-                  (number)))))))
+        (argument_list
+          (value
+            (dag_arg
+              (value
+                (identifier)))
+            (multiline_comment)
+            (dag_arg
+              (value
+                (dag_arg
+                  (value
+                    (identifier)))
+                (dag_arg
+                  (value
+                    (number)))))
+            (multiline_comment)
+            (dag_arg
+              (value
+                (dag_arg
+                  (value
+                    (identifier)))
+                (dag_arg
+                  (value
+                    (number))))))))
       (record_body))))
 
 ================================================================================
@@ -308,19 +314,20 @@ def : Pat<(VTIs[0].Vec MQPR:$offsets)>;
     (def
       (parent_class_list
         (identifier)
-        (value
-          (dag_arg
-            (value
-              (identifier)
-              (value_suffix
-                (value
-                  (number)))
-              (value_suffix
-                (identifier))))
-          (dag_arg
-            (value
-              (identifier))
-            (var))))
+        (argument_list
+          (value
+            (dag_arg
+              (value
+                (identifier)
+                (value_suffix
+                  (value
+                    (number)))
+                (value_suffix
+                  (identifier))))
+            (dag_arg
+              (value
+                (identifier))
+              (var)))))
       (record_body))))
 
 ================================================================================
@@ -359,8 +366,9 @@ def NAME : C<".this \"should not emit\" ">;
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (string_string)))
+        (argument_list
+          (value
+            (string_string))))
       (record_body))))
 
 ================================================================================
@@ -393,9 +401,10 @@ def Callseq_Start :
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (string_string)
-          (string_string)))
+        (argument_list
+          (value
+            (string_string)
+            (string_string))))
       (record_body))))
 
 ================================================================================
@@ -411,8 +420,9 @@ class PseudoUseParamInst :
       (identifier)
       (parent_class_list
         (identifier)
-        (value
-          (string_string)))
+        (argument_list
+          (value
+            (string_string))))
       (record_body))))
 
 ================================================================================
@@ -431,10 +441,11 @@ def NAME# : I<0, Pseudo>;
           (identifier)))
       (parent_class_list
         (identifier)
-        (value
-          (number))
-        (value
-          (identifier)))
+        (argument_list
+          (value
+            (number))
+          (value
+            (identifier))))
       (record_body))))
 
 ================================================================================
@@ -476,22 +487,229 @@ def frag_anyptr : PatFrag<(ops node:$src),
         (identifier))
       (parent_class_list
         (identifier)
-        (value
-          (dag_arg
-            (value
-              (identifier)))
-          (dag_arg
-            (value
-              (identifier))
-            (var)))
-        (value
-          (dag_arg
-            (value
-              (identifier)))
-          (dag_arg
-            (value
-              (identifier))
-            (var)))
-        (value
-          (code_string)))
+        (argument_list
+          (value
+            (dag_arg
+              (value
+                (identifier)))
+            (dag_arg
+              (value
+                (identifier))
+              (var)))
+          (value
+            (dag_arg
+              (value
+                (identifier)))
+            (dag_arg
+              (value
+                (identifier))
+              (var)))
+          (value
+            (code_string))))
       (record_body))))
+
+================================================================================
+named argument
+================================================================================
+def OpAddArguments : OpenMP_Op<"op_add_arguments",
+    traits=[AttrSizedOperandSegments], clauses=[ReqClause, OptClause]> {
+}
+--------------------------------------------------------------------------------
+
+(file
+  (statement
+    (def
+      (value
+        (identifier))
+      (parent_class_list
+        (identifier)
+        (argument_list
+          (value
+            (string_string))
+          (identifier)
+          (value
+            (value
+              (identifier)))
+          (identifier)
+          (value
+            (value
+              (identifier))
+            (value
+              (identifier)))))
+      (record_body))))
+
+================================================================================
+Arguments with arguments
+================================================================================
+def OpSkipArguments : OpenMP_Op<"op_skip_arguments",
+    traits=[TraitThree], clauses=[OptClauseSkip<arguments=true>]> {
+}
+--------------------------------------------------------------------------------
+
+(file
+  (statement
+    (def
+      (value
+        (identifier))
+      (parent_class_list
+        (identifier)
+        (argument_list
+          (value
+            (string_string))
+          (identifier)
+          (value
+            (value
+              (identifier)))
+          (identifier)
+          (value
+            (value
+              (identifier)
+              (value_suffix
+                (argument_list
+                  (identifier)
+                  (value)))))))
+      (record_body))))
+
+================================================================================
+dump
+================================================================================
+dump "Debug message";
+dump "The Value of A is: \n" # !repr(a);
+dump "got a pair of values [" # !repr(value_A) # " : " # !repr(value_B) # "], " # "and an empty record:\n" # !repr(X);
+
+multiclass MC<dag s> {
+  dump "s = " # !repr(s);
+  dump "args[0] = " # !repr(!getdagarg<A>(s,0));
+  def A;
+}
+--------------------------------------------------------------------------------
+
+(file
+  (statement
+    (dump
+      (value
+        (string_string))))
+  (statement
+    (dump
+      (value
+        (value
+          (string_string))
+        (value
+          (operator
+            (operator_keyword)
+            (value
+              (identifier)))))))
+  (statement
+    (dump
+      (value
+        (value
+          (value
+            (value
+              (value
+                (value
+                  (value
+                    (string_string))
+                  (value
+                    (operator
+                      (operator_keyword)
+                      (value
+                        (identifier)))))
+                (value
+                  (string_string)))
+              (value
+                (operator
+                  (operator_keyword)
+                  (value
+                    (identifier)))))
+            (value
+              (string_string)))
+          (value
+            (string_string)))
+        (value
+          (operator
+            (operator_keyword)
+            (value
+              (identifier)))))))
+  (statement
+    (multiclass
+      (identifier)
+      (template_args
+        (template_arg
+          (type)
+          (identifier)))
+      (multiclass_body
+        (multiclass_statement
+          (dump
+            (value
+              (value
+                (string_string))
+              (value
+                (operator
+                  (operator_keyword)
+                  (value
+                    (identifier)))))))
+        (multiclass_statement
+          (dump
+            (value
+              (value
+                (string_string))
+              (value
+                (operator
+                  (operator_keyword)
+                  (value
+                    (operator
+                      (operator_keyword)
+                      (type
+                        (identifier))
+                      (value
+                        (identifier))
+                      (value
+                        (number)))))))))
+        (multiclass_statement
+          (def
+            (value
+              (identifier))
+            (record_body)))))))
+
+================================================================================
+deftype
+================================================================================
+deftype Integer        = int;
+deftype IntList        = list<int>;
+--------------------------------------------------------------------------------
+
+(file
+  (statement
+    (deftype
+      (identifier)
+      (type)))
+  (statement
+    (deftype
+      (identifier)
+      (type
+        (type)))))
+
+================================================================================
+slice
+================================================================================
+def Rec11 {
+  list<int> rr_ = rev[rev,];
+}
+--------------------------------------------------------------------------------
+
+(file
+  (statement
+    (def
+      (value
+        (identifier))
+      (record_body
+        (body_item
+          (instruction
+            (type
+              (type))
+            (identifier)
+            (value
+              (identifier)
+              (value_suffix
+                (value
+                  (identifier))))))))))
